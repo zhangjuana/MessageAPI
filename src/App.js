@@ -1,35 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-import DocumentTitle from 'react-document-title';
-
-import {
-  Route,
-} from 'react-router-dom'
-
-import { Button } from 'antd-mobile';
-
-import AScreen from './Screen/AScreen';
-import BScreen from './Screen/BScreen';
+import { Route } from 'react-router-dom'
+import LoginScreen from './Screen/LoginScreen';
+import RegisterScreen from './Screen/RegisterScreen';
+import HomeScreen from './Screen/HomeScreen';
+import CreateMessageScreen from './Screen/CreateMessageScreen';
 
 class App extends Component {
   render() {
     return (
-      <DocumentTitle title='HomeTitle'>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
-          <Button>Click</Button>
-          <Route path={'/a'} component={AScreen} />
-          <Route path={'/b'} component={BScreen} />
+        <div>       
+        <Route exact path={'/'}  component={LoginScreen} />
+        <Route path={'/RegisterScreen'} component={RegisterScreen} />
+        <Route path={'/HomeScreen'} component={HomeScreen} />
+        <Route path={'/CreateMessageScreen'} component={CreateMessageScreen} />
         </div>
-      </DocumentTitle>
     );
   }
 }

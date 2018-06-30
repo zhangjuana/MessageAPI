@@ -8,13 +8,15 @@ import {
     WhiteSpace ,
     List,
     InputItem,
+    Icon
 } from 'antd-mobile';
 
 import userManager from '../DataServer/UserManager';
 
 
 
-export default class LoginScreen extends Component {
+export default class RegisterScreen extends Component {
+
 
     constructor(props) {
       super(props)
@@ -31,22 +33,24 @@ export default class LoginScreen extends Component {
       <div>
         <NavBar
             mode="dark"
-        >登录</NavBar>
+            icon={<Icon type="left" />}
+            onLeftClick={() => {this.props.history.goBack()}}
+        >注册</NavBar>
         <WhiteSpace/>
         <List>
             <InputItem
                 type={'text'}
                 value={this.state.username}
                 onChange={(username)=>{this.setState({username})}}
-                placeholder={'请输入登录用户名'}
+                placeholder={'请输入注册用户名'}
             >
                 用户名
             </InputItem>
             <InputItem
-                type={'password'}
+                type={'text'}
                 value={this.state.password}
                 onChange={(password)=>{this.setState({password})}}
-                placeholder={'请输入登录密码'}
+                placeholder={'请输入注册密码'}
             >
                 密码
             </InputItem>
@@ -56,25 +60,17 @@ export default class LoginScreen extends Component {
             <Button
                 type={'primary'}
                 onClick={async()=>{
-                    const result = await userManager.login(this.state.username,this.state.password);
+                    const result = await userManager.register(this.state.username,this.state.password);
                     console.log(result);
                     if(result.success === false){
                         Toast.fail(result.errorMessage);
                         return;
                     }
                     this.props.history.replace('/HomeScreen');
+                    
                 }}
             >
-                登录
-            </Button>
-            <WhiteSpace/>
-            <Button
-                type={'primary'}
-                onClick={()=>{
-                    this.props.history.push('/RegisterScreen',{})
-                }}
-            >
-                注册
+                提交注册
             </Button>
         </WingBlank>
       </div>
